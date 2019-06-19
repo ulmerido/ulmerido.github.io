@@ -1,0 +1,600 @@
+/*******************************/
+/**********GENERAL**************/
+/********************************/
+
+body {
+    background-image: url("wood-background.jpg");
+    font-family: 'Atma';
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+}
+
+@media only screen and (max-width: 1300px), (max-height: 680px) {
+  body {
+    zoom: 80%;
+  }
+}
+
+.flex-container {
+    zoom: 90%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap; 
+    align-items: center;
+    justify-content: center;  
+}
+
+
+.flex-container > div {
+    margin: 6px;
+}
+
+/*****************************/
+/*************TOP*************/
+/*****************************/
+
+.flex-container-head {
+    display: flex;
+    flex-direction: row; 
+    flex-wrap: wrap;   
+}
+
+.flex-container-head > div {
+    margin: 6px;
+}
+
+/***********SCOREBOARD***********/
+
+#myScoreBoard {
+    border-radius: 25px;
+    border-collapse: separate;
+    border: 3px solid black;
+    background-color: rgba(255, 255, 255, 0.2);
+    text-align: center;
+    padding: 0 180px;
+}
+
+#myScoreBoard p {
+    margin: 0;
+}
+
+#myScoreBoard td {
+    background-color: wheat;
+    border-radius: 25px;
+    border: 3px solid black;
+    padding: 10px 150px;
+}
+
+/*********************************/
+/****************MID**************/
+/********************************/
+
+.flex-container-mid, .flex-container-bottom{
+    display: flex;
+    flex-direction: row; 
+    flex-wrap: wrap;  
+    text-align: center;
+    border-radius: 25px;
+    border: 5px solid black;
+    background-color: rgba(255, 255, 255, 0.2)
+}
+
+.flex-container-mid > div {
+    margin: 6px;
+}
+
+/************BOARD*****************/
+
+.gameBoard {
+  display: flex;
+  align-items: center;
+  justify-content: center;  
+  
+}
+
+#myBoard {
+    border-collapse: collapse;
+    border: 3px solid black;
+    margin: 0px 40px;
+    
+}
+
+#myBoard td {
+    border: 1px solid black;
+    padding: 8px;
+    width: 30px;
+    height: 30px;
+}
+
+/*************STATS***************/
+
+#stats1-container, #stats2-container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap; 
+    align-items: center;
+    justify-content: center; 
+}
+
+#player1-name, #player2-name {
+    margin: 0;
+    font-size: 30px !important;
+}
+
+.notcurrent-player {
+    border-radius: 25px;
+    border: 3px solid transparent;
+    padding: 0 10px;
+    box-shadow: 0 2px 25px rgba(0, 0, 0, 0.5);
+}
+
+.current-player {
+    border-radius: 25px;
+    background-color: rgba(255, 0, 0, 0.5);
+    border: 3px solid black;
+    padding: 0 10px;
+    box-shadow: 0 2px 25px rgba(255, 255, 255, 0.5);
+}
+
+#player1Stats, #player2Stats {
+    border-radius: 25px;
+    border-collapse: separate;
+}
+
+#player1Stats {
+    border: 3px solid white;
+}
+
+#player2Stats {
+    border: 3px solid black;
+}
+
+#player1Stats-div, #player2Stats-div {
+  margin: 5px 0;
+}
+
+#player1Stats tr, #player2Stats tr {
+    border-radius: 25px;
+    border: 3px solid black;
+    margin: 0px;
+}
+
+#player1Stats td, #player2Stats td {
+    border-radius: 25px;
+    padding: 10px;
+}
+
+#player1Stats td {
+    background-color: rgba(255, 255, 255, 0.4);
+    border: 3px solid white;
+}
+
+#player2Stats td {
+    background-color: rgba(0, 0, 0, 0.3);
+    color: white;
+    border: 3px solid black;
+}
+
+
+/******************************/
+/*************BOTTOM***********/
+/*******************************/
+
+/*
+.checkboxes-contrainer {
+  display: flex;
+  flex-direction: row; 
+  flex-wrap: wrap;  
+  align-items: center;
+  justify-content: space-between;   
+  padding: 0px;
+}
+
+.checkboxes-container > div {
+  margin: 0 30px; 
+}
+*/
+.container {
+  display: flex;
+  flex-direction: row; 
+  flex-wrap: wrap;  
+  align-items: center;
+  justify-content: space-between;   
+  padding: 0px;
+}
+
+.container > div {
+   margin: 0 30px; 
+}
+
+.flex-container-bottom > div {
+    margin: 6px;
+}
+
+.start-panel {
+    display: flex;
+    flex-direction: row; 
+    flex-wrap: wrap; 
+    align-items: flex-start;
+    justify-content: center;  
+}
+
+.control-panel {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center; 
+    border-radius: 25px;
+}
+
+#timer-control {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+
+#timer-control > button {
+    margin: 10px;
+}
+
+
+/**************OTHER****************/
+
+.game-off tr:nth-child(even) td:nth-child(even){
+    background-color: #07660B;
+    /*background-image: url("square1.jpg");*/
+}
+
+.game-off tr:nth-child(odd) td:nth-child(odd){
+    background-color: #07660B;
+    /*background-image: url("square1.jpg");*/
+}
+
+.game-off tr:nth-child(odd) td:nth-child(even){
+    background-color: #028906;
+    /*background-image: url("square2.jpg");*/
+}
+
+.game-off tr:nth-child(even) td:nth-child(odd){
+    background-color: #028906;
+    /*background-image: url("square2.jpg");*/
+}
+
+.game-on tr:nth-child(even) td:nth-child(even){
+    background-color: #07660B;
+}
+
+.game-on tr:nth-child(odd) td:nth-child(odd){
+    background-color: #07660B;
+}
+
+.game-on tr:nth-child(odd) td:nth-child(even){
+    background-color: #028906;
+}
+
+.game-on tr:nth-child(even) td:nth-child(odd){
+    background-color: #028906;
+}
+
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/*
+.modal {
+    animation: topBubbles ease-in-out 0.75s forwards;
+}
+
+.modal {
+    animation: bottomBubbles ease-in-out 0.75s forwards;
+}
+*/
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    border-radius: 25px;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+    text-align: center;
+    font-size: 150%;
+    animation: colorchange 20s; /* animation-name followed by duration in seconds*/
+         /* you could also use milliseconds (ms) or something like 2.5s */
+}
+
+/* The Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+@keyframes colorchange
+{
+  0%   {background: yellow;}
+  10%  {background: rgb(255, 255, 255);}
+  20%  {background: rgb(0, 255, 136);}
+  30%  {background: rgb(38, 211, 211);}
+  40%  {background: rgb(240, 51, 155);}
+  50%  {background: rgb(198, 43, 230);}
+  60%  {background: rgb(29, 80, 248);}
+  70%  {background: green;}
+  80%  {background: rgb(126, 255, 126);}
+  90%  {background: rgb(230, 192, 68);}
+  100% {background: yellow;}
+}
+
+
+/***************************************/
+/************ Start Stop Buttons*******/
+/*************************************/
+
+.bubbly-button{
+  font-family: "Atma";
+  display: inline-block;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 15px 35px;
+  margin-top: 100px;
+  margin-bottom: 60px;
+  -webkit-appearance: none;
+  appearance: none;
+  color: #fff;
+  border-radius: 4px;
+  background-color: #dd3636;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  transition: transform ease-in 0.1s, box-shadow ease-in 0.25s;
+  box-shadow: 0 2px 25px rgba(255, 255, 255, 0.5); 
+}
+
+.bubbly-button:disabled {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.bubbly-button:focus {
+    outline: 0;
+}
+  
+.bubbly-button:before, .bubbly-button:after {
+    position: absolute;
+    content: '';
+    display: block;
+    width: 140%;
+    height: 100%;
+    left: -20%;
+    z-index: -1000;
+    transition: all ease-in-out 0.5s;
+    background-repeat: no-repeat;
+}
+  
+.bubbly-button:before {
+    display: none;
+    top: -75%;
+    background-image:  
+    radial-gradient(circle, #ff0808 20%, transparent 20%),
+    radial-gradient(circle,  transparent 20%, #ff0081 20%, transparent 30%),
+    radial-gradient(circle, #ffffff 20%, transparent 20%), 
+    radial-gradient(circle, #ffee00 20%, transparent 20%),
+    radial-gradient(circle,  transparent 10%, #ff0081 15%, transparent 20%),
+    radial-gradient(circle, #ffee00 20%, transparent 20%),
+    radial-gradient(circle, #ff0808 20%, transparent 20%),
+    radial-gradient(circle, #ffee00 20%, transparent 20%),
+    radial-gradient(circle, #ff0808 20%, transparent 20%);
+  background-size: 10% 10%, 20% 20%, 15% 15%, 20% 20%, 18% 18%, 10% 10%, 15% 15%, 10% 10%, 18% 18%;
+}
+  
+.bubbly-button:after {
+    display: none;
+    bottom: -75%;
+    background-image:  
+    radial-gradient(circle, #ff0808 20%, transparent 20%), 
+    radial-gradient(circle, #ff0081 20%, transparent 20%),
+    radial-gradient(circle,  transparent 10%, #ff0081 15%, transparent 20%),
+    radial-gradient(circle, #ffffff 20%, transparent 20%),
+    radial-gradient(circle, #ff0081 20%, transparent 20%),
+    radial-gradient(circle, #ffee00 20%, transparent 20%),
+    radial-gradient(circle, #ffee00 20%, transparent 20%);
+  background-size: 15% 15%, 20% 20%, 18% 18%, 20% 20%, 15% 15%, 10% 10%, 20% 20%;
+}
+ 
+.bubbly-button:active {
+    transform: scale(0.9);
+    background-color: darken(#ff0808, 5%);
+    box-shadow: 0 2px 25px rgba(255, 0, 130, 0.2);
+}
+  
+.bubbly-button.animate:before {
+      display: block;
+      animation: topBubbles ease-in-out 0.75s forwards;
+}
+
+.bubbly-button.animate:after {
+      display: block;
+      animation: bottomBubbles ease-in-out 0.75s forwards;
+}
+
+@keyframes topBubbles {
+  0%{
+    background-position: 5% 90%, 10% 90%, 10% 90%, 15% 90%, 25% 90%, 25% 90%, 40% 90%, 55% 90%, 70% 90%;
+  }
+    50% {
+      background-position: 0% 80%, 0% 20%, 10% 40%, 20% 0%, 30% 30%, 22% 50%, 50% 50%, 65% 20%, 90% 30%;}
+ 100% {
+    background-position: 0% 70%, 0% 10%, 10% 30%, 20% -10%, 30% 20%, 22% 40%, 50% 40%, 65% 10%, 90% 20%;
+  background-size: 0% 0%, 0% 0%,  0% 0%,  0% 0%,  0% 0%,  0% 0%;
+  }
+}
+
+@keyframes bottomBubbles {
+  0%{
+    background-position: 10% -10%, 30% 10%, 55% -10%, 70% -10%, 85% -10%, 70% -10%, 70% 0%;
+  }
+  50% {
+    background-position: 0% 80%, 20% 80%, 45% 60%, 60% 100%, 75% 70%, 95% 60%, 105% 0%;}
+ 100% {
+    background-position: 0% 90%, 20% 90%, 45% 70%, 60% 110%, 75% 80%, 95% 70%, 110% 10%;
+  background-size: 0% 0%, 0% 0%,  0% 0%,  0% 0%,  0% 0%,  0% 0%;
+  }
+}
+
+/**********************/
+/****Trainer Button****/
+/**********************/
+
+  .container > .row {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+  }
+
+  .container > div span {
+    padding-right: 10px;
+    font-size: 120%
+  }
+
+  .checkbox input {
+    display: none;
+  }
+
+  .checkbox input:checked + label {
+    background: rgb(255, 8, 8, 0.6)
+  }
+
+  .checkbox input:checked + label:before {
+    -moz-transform: translateX(1.2em);
+    -webkit-transform: translateX(1.2em);
+    transform: translateX(1.2em);
+  }
+
+  .checkbox label {
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-tap-highlight-color: transparent;
+    width: 2.4em;
+    height: 1.2em;
+    padding: .2em;
+    background: #bcb8b8;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 1em;
+    -webkit-transition: background .1s ease;
+    transition: background .1s ease;
+  }
+  
+  .checkbox label:before {
+    content: '';
+    display: block;
+    width: 1.2em;
+    height: 1.2em;
+    background: #e7e7e7;
+    box-shadow: 3px 5px 20px -3px rgba(0, 0, 0, 0.32);
+    border-radius: 50%;
+    -webkit-transition: -webkit-transform .1s ease;
+    transition: -webkit-transform .1s ease;
+    transition: transform .1s ease;
+    transition: transform .1s ease, -webkit-transform .1s ease;
+  }
+
+
+  /*************/
+  /****List*****/
+  /*************/
+  .custom-select {
+    position: relative;
+  }
+  
+  .custom-select select {
+    display: none; /*hide original SELECT element: */
+  }
+  
+  .select-selected {
+    background-color: #dd3636;
+    border-radius: 25px;
+  }
+  
+  .select-selected-off {
+    background-color: #bcb8b8;
+    border-radius: 25px;
+  }
+
+  /* Style the arrow inside the select element: */
+  .select-selected:after {
+    position: absolute;
+    content: "";
+    top: 14px;
+    right: 10px;
+    width: 0;
+    height: 0;
+    border: 6px solid transparent;
+    border-color: #fff transparent transparent transparent;
+  }
+  
+  /* Point the arrow upwards when the select box is open (active): */
+  .select-selected.select-arrow-active:after {
+    border-color: transparent transparent #fff transparent;
+    top: 7px;
+  }
+  
+  /* style the items (options), including the selected item: */
+  .select-items div,.select-selected,.select-selected-off {
+    color: #ffffff;
+    padding: 8px 16px;
+    border: 1px solid transparent;
+    border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+    cursor: pointer;
+  }
+  
+  /* Style items (options): */
+  .select-items {
+    position: absolute;
+    background-color: rgba(188, 184, 184, 0.5);
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 99;
+    border-radius: 25px;
+  }
+  
+  /* Hide the items when the select box is closed: */
+  .select-hide {
+    display: none;
+  }
+  
+  .select-items div:hover, .same-as-selected {
+    background-color: rgba(0, 0, 0, 0.1);
+  }

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link href='https://fonts.googleapis.com/css?family=Atma' rel='stylesheet'>
+    <title>Reversi</title>
+  </head>
+  <body>
+    <div class="flex-container">
+
+      <div class="flex-container-head">
+        <div class="scoreBoard">
+            <table id="myScoreBoard">
+                <tr>
+                    <td>
+                        <p id="time">Time : <label id="minutes">00</label>:<label id="seconds">00</label></p> 
+                    </td>
+                </tr>
+                <tr>
+                    <td>Rounds: <label id="rounds">0</label></td>
+                </tr>
+            </table> 
+        </div>
+      </div>
+
+      <div class="flex-container-mid">
+        <div id="stats1-container" class="notcurrent-player">
+          <div id="player1-name-div">
+            <label id="player1-name">Player 1</label>
+          </div>
+          <div id="player2Stats-div">
+            <table id="player1Stats">
+                <tr>
+                    <td class="player1 flex-container">2 Pawns: <label id="2pawns-player1">1</label></td>
+                </tr>
+                <tr>
+                    <td class="player1 flex-container">Average Time: <label id="average-player1">0.00</label></td>
+                </tr>
+                <tr>
+                    <td class="player1 flex-container">Score: <label id="score-player1">2</label></td>
+                </tr>
+                <tr>
+                    <td class="player1 flex-container">Average vs Games: <label id="averageGames-player1">0.00</label></td>
+                </tr>
+            </table>
+          </div>
+        </div>
+
+        <div class="gameBoard">
+            <table id="myBoard" class="game-off"></table>
+        </div>
+
+        <div id="stats2-container" class="notcurrent-player">
+          <div id="player2-name-div">
+            <label id="player2-name">Player 2</label>
+          </div>
+          <div id=player2Stats-div>
+            <table id="player2Stats">
+                <tr>
+                    <td class="player2 flex-container">2 Pawns: <label id="2pawns-player2">1</label></td>
+                </tr>
+                <tr>
+                    <td class="player2 flex-container">Average Time: <label id="average-player2">0.00</label></td>
+                </tr>
+                <tr>
+                    <td class="player2 flex-container">Score: <label id="score-player2">2</label></td>
+                </tr>
+                <tr>
+                    <td class="player2 flex-container">Average vs Games: <label id="averageGames-player2">0.00</label></td>
+                </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex-container-bottom">
+        <div class="control-panel">
+          <div class="container">
+            <div class="row">
+              <span>Trainer Mode</span>
+              <div class="checkbox">
+                <input type="checkbox" id="trainer"/>
+                <label for="trainer"></label>
+              </div>
+            </div>
+            <div id="size-div" class="custom-select" style="width:100px;">
+              <select onchange="Logic.changeBoardSize(this.value)">
+                <option value=6 >6X6</option>
+                <option value=8>8X8</option>
+                <option value=10 selected>10X10</option>
+                <option value=12>12X12</option>
+                <option value=14>14X14</option>
+                <option value=16>16X16</option>
+              </select>
+            </div>
+            <div class="row">
+              <span>VS. Computer</span>
+              <div class="checkbox">
+                <input type="checkbox" id="AI"/>
+                <label for="AI"></label>
+              </div>
+            </div>
+          </div>
+          <div class="start-panel">
+            <div id="timer-control">
+              <button id="start" class="bubbly-button" > Start </button> 
+              <button id="stop" class="bubbly-button"  disabled> Stop </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+      
+      <!-- The Modal -->
+    <div id="myModal" class="modal">
+
+      <!-- Modal content -->
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <p id="myModalText">Some text in the Modal..</p>
+      </div>
+    </div>
+  
+    
+
+    <script src="reversi.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="style.css" />
+  </body>
+</html>
+
