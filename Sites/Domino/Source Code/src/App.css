@@ -1,0 +1,47 @@
+.domino-game {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+   
+}
+
+.body {
+    display: flex;
+    justify-content: center;
+}
+
+body {
+    font-family: 'Atma';
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+}
+
+body {
+    /*background-color: rgb(115, 255, 197);*/
+    background-image: url("./67037.jpg");
+}
+html, body {
+    height: 100%;
+}
+
+td {
+    padding: 0px;
+}
+
+.right-nav {
+    display: flex;
+    flex-direction: column;
+}
