@@ -180,28 +180,28 @@ a {
 }
 #site-menu .menu-item:nth-child(1):after {
   background-color: blue;
-  background-image: url("./Images/othello2.png");
+  background-image: url("http://lorempixel.com/404/602/sports/");
 }
 #site-menu .menu-item:nth-child(2) {
   margin-left: 16.8608486015%;
 }
 #site-menu .menu-item:nth-child(2):after {
   background-color: red;
-  background-image: url("./Images/domino2.png");
+  background-image: url("http://lorempixel.com/400/600/sports/");
 }
 #site-menu .menu-item:nth-child(3) {
   margin-left: 33.7216972029%;
 }
 #site-menu .menu-item:nth-child(3):after {
   background-color: yellow;
-  background-image: url("./Images/Mtazon.jpeg");
+  background-image: url("http://lorempixel.com/400/700/sports/");
 }
 #site-menu .menu-item:nth-child(4) {
   margin-left: 50.5825458044%;
 }
 #site-menu .menu-item:nth-child(4):after {
   background-color: orange;
-  background-image: url("./Images/checkers.gif");
+  background-image: url("http://lorempixel.com/400/801/technics/");
 }
 #site-menu .menu-item:nth-child(5) {
   margin-left: 67.4433944058%;
@@ -209,7 +209,7 @@ a {
 }
 #site-menu .menu-item:nth-child(5):after {
   background-color: purple;
-  background-image: url("./Images/vg.png");
+  background-image: url("http://lorempixel.com/305/400/people/");
 }
 #site-menu .menu-item:nth-child(6) {
   margin-left: 84.3042430073%;
@@ -218,7 +218,7 @@ a {
 }
 #site-menu .menu-item:nth-child(6):after {
   background-color: violet;
-  background-image: url("./Images/pgm.jpg");
+  background-image: url("http://lorempixel.com/300/350/people/");
 }
 #site-menu .menu-item:nth-child(7) {
   margin-left: 67.4433944058%;
@@ -227,7 +227,7 @@ a {
 }
 #site-menu .menu-item:nth-child(7):after {
   background-color: green;
-  background-image: url("./Images/linkedin.jpg");
+  background-image: url("http://lorempixel.com/200/330/people/");
 }
 #site-menu .menu-item:nth-child(8) {
   margin-left: 84.3042430073%;
@@ -236,7 +236,7 @@ a {
 }
 #site-menu .menu-item:nth-child(8):after {
   background-color: gray;
-  background-image: url("./Images/facebook.jpg");
+  background-image: url("http://lorempixel.com/200/200/nightlife/");
 }
 #site-menu .menu-item:after {
   content: '';
