@@ -8,31 +8,36 @@ class Board extends Component {
         this.state = {
             isMove: false,
             brickToInsert: null
-
         };
 
         this.renderTable = this.renderTable.bind(this);
+        this.isGlow = this.isGlow.bind(this);
+        /*this.handleDrop = this.handleDrop.bind(this);
+        this.handleDragOver = this.handleDragOver.bind(this);*/
     }
 
     static getDerivedStateFromProps(nextProps, prevState) {
-        if(prevState.isMove !== nextProps.isMove)
-        {
+        if(prevState.isMove !== nextProps.isMove) {
             return {
                 isMove: !prevState.isMove,
-                brickToinsert: nextProps.brickToInsert
+                brickToInsert: nextProps.brickToInsert
             };
         }
-
         return null;
-
     }
 
-
+    isGlow() {
+        if(this.props.status2) {
+            return "yes";
+        }
+        else {
+            return "no";
+        }
+    }
+    
     renderTable() {
         let myTable = this.props.myBoard;
-        console.log(myTable);
 
-        //let value = [];
         return myTable.map(row => {
             return (
                 <tr>
@@ -40,7 +45,13 @@ class Board extends Component {
                     if(column.occupied) {
                         return(
                             <td>
-                            <DominoBrick status="neutral" numbers={column.brick} upSideDown={column.upSideDown} className={column.direction} />
+                            <DominoBrick key={`brick${column.brick[0]}${column.brick[1]}`} 
+                                            status="neutral" 
+                                            status2={this.isGlow()}
+                                            numbers={column.brick} 
+                                            isDeckBrick={false}
+                                            direction={column.direction} 
+                                            className={column.direction} />
                             </td>)
                     }
                     else {
@@ -48,42 +59,31 @@ class Board extends Component {
                         <td></td>)
                     }})}
                 </tr>)
-            console.log(value);
-            return value;
         })
-        /*
-            <tr>
-                { row.map(column => {
-                    console.log(column);
-                    if(column.occupied) {
-                        <td>
-                            <DominoBrick numbers={column.brick} className={column.direction} />
-                        </td>
-                    }
-                    else {
-                        <td>
-                        </td>
-                    }
-                })}
-            </tr>
-        })
-        console.log(value);
-        */
     }
 
+    /*
+    handleDrop(e, con) {
+        this.props.handleDrop(e, con);
+    }
+
+    handleDragOver(ev) {
+        ev.preventDefault();
+    }
+*/
     render() {
         
         return (
             <div className="board">
                 <table>
-                    <tbody>
+                    <tbody /*onDrop={(e) => this.handleDrop(e, "complete")} 
+                            onDragOver={(e) => this.handleDragOver(e)}*/>
                         {this.renderTable()}
                     </tbody>
                 </table>
             </div>
         );
     }
-
 }
 
 export default Board

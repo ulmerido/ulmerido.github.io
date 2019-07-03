@@ -5,7 +5,6 @@
     font-size: 15px;
     width: 2em; /*can change*/
     height: 4em; /*can change*/
-    margin: 0px;
     border-radius: .8em;
     box-shadow: 0.1em 0.1em 0em 0.1em #333;
     display: flex;
@@ -33,14 +32,46 @@
 
 .domino-brick[status="invalid"] {
     background-color: red;
+}
+
+
+.domino-brick[direction="horizontal"] {
+    transform: rotate(90deg);
+    margin: 0 15px;
+}
+
+.domino-brick[direction="vertical"] {
+    margin: 0 15px;
+}
+
+.domino-brick[status="invalid"]:hover {
+    animation: nudge .4s linear;
+}
+
+@-webkit-keyframes greenPulse {
+    from { background-color: #749a02; -webkit-box-shadow: 0 0 9px #333; }
+    50% { background-color: #91bd09; -webkit-box-shadow: 0 0 18px #91bd09; }
+    to { background-color: #749a02; -webkit-box-shadow: 0 0 9px #333; }
+}
+
+.domino-brick[status2="yes"] {
+    -webkit-animation-name: greenPulse;
+    -webkit-animation-duration: 2s;
+    -webkit-animation-iteration-count: infinite;
+}
+
+  
+@keyframes nudge {
+  
+    0% {
+      transform: rotate(-7deg);
+    }
     
+    33% {
+      transform: rotate(7deg);
+    }
+    
+    66% {
+      transform: rotate(-7deg);
+    }
 }
-/*
-.top {
-    background-color: #00A0C7;
-
-}
-
-.bottom {
-    background-color: #008CC0;
-}*/

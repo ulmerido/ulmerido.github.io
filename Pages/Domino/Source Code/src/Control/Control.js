@@ -5,6 +5,9 @@ import "./Control.css";
 class Control extends Component {
     constructor(props) {
         super(props);
+        this.ref = [];
+        this.ref[0] = React.createRef;
+        this.ref[1] = React.createRef;
         this.state = {
             isGameStarted: false,
         };
@@ -30,6 +33,7 @@ class Control extends Component {
             }
         })
     }
+
 
     render() {
         return (

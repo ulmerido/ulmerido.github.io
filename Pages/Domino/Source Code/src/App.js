@@ -1,5 +1,4 @@
 import React, {Component} from "react";
-import Stats from "./Stats/Stats";
 import Deck from "./Deck/Deck";
 import Board from "./Board/Board";
 import Control from "./Control/Control";
@@ -7,8 +6,7 @@ import Popup from "./Popup";
 import GameTimer from "./Stats/Stats-Components/GameTimer/GameTimer";
 
 import "./App.css";
-class StatsTimer
-{
+class StatsTimer {
     constructor() {
         this.minutes = "00",
         this.seconds = "00"
@@ -102,21 +100,17 @@ class Statistics {
         this.numOfTurns ++;
         this._updateSumOfHandWeight(playerHand);
         this._updateTime();
-/*
-        console.log("Number of turns: ", this.numOfTurns);
-        console.log("Time from start: ", this.timeFromStartSeconds);
-        console.log("Number of draws from deck", this.numOfTileDraws);
-        console.log("avg Time in secondes", this.avgTimeOfTurnSeconds);
-        console.log("sum of hand weight", this.sumOfHandWeight);
-        */
     }
 
     _updateSumOfHandWeight(hand) {
         let sum = 0;
-        for (const tile of hand) {
-            sum += tile[0] + tile[1];
+        for(let i = 0 ; i < hand.length ; i++) {
+            for(let j = 0 ; j <hand[i].length ; j++) {
+                if(hand[i][j].occupied) {
+                    sum += hand[i][j].brick[0] + hand[i][j].brick[1];
+                }
+            }
         }
-
         this.sumOfHandWeight = sum;
     }
 
@@ -128,7 +122,7 @@ class Statistics {
 
     _updateAvgTimeOfTurn() {
         this.avgTimeOfTurnSeconds = 0;
-        if(this.numOfTurns > 1) {      // wierd bug when doing numOfTurn > 0 we will get NaN on avgTime
+        if(this.numOfTurns > 1) {      // weird bug when doing numOfTurn > 0 we will get NaN on avgTime
             this.avgTimeOfTurnSeconds = (this.timeFromStartSeconds / this.numOfTurns).toFixed(2);
         }
     }
@@ -160,6 +154,7 @@ class App extends Component {
         this.state = {
             numOfPlayers: 1, 
             isGameStarted: false,
+            isTimerStarted: false,
             isGameEnded: false,
             popupMessage: "",
             selectedBrick: { numbers: [],
@@ -170,8 +165,10 @@ class App extends Component {
             myBoard: [],
             myPile: [],
             history: [],
+            next: [],
             isPileEmpty: false,
             isCheckEndGame: false,
+            isLeftMoves: "",
             player1Stats: new Statistics(),
         };
 
@@ -186,16 +183,22 @@ class App extends Component {
         this.deepClone = this.deepClone.bind(this);
         this.isLegalMove = this.isLegalMove.bind(this);
         this.isLegalDraw = this.isLegalDraw.bind(this);
-        this.doPrev = this.doPrev.bind(this);
         this.getCurrentGameState = this.getCurrentGameState.bind(this);
+        this.saveCurrentStateForNext = this.saveCurrentStateForNext.bind(this);
         this.saveCurrentStateForHistory = this.saveCurrentStateForHistory.bind(this);
-        this.handelUndoClick = this.handelUndoClick.bind(this);
+        this.handlePrevClick = this.handlePrevClick.bind(this);
+        this.doPrev = this.doPrev.bind(this);
+        this.handleNextClick = this.handleNextClick.bind(this);
+        this.doNext = this.doNext.bind(this);
+        this.handleUndoClick = this.handleUndoClick.bind(this);
+        this.doUndo = this.doUndo.bind(this);
         this.nextTurn = this.nextTurn.bind(this);
         this.updateStatsAfterMove = this.updateStatsAfterMove.bind(this);
         this.checkEndGame = this.checkEndGame.bind(this);
         this.togglePopup = this.togglePopup.bind(this);
         this.checkLeftValidMoves = this.checkLeftValidMoves.bind(this);
-
+        this.handleTimer = this.handleTimer.bind(this);
+        this.checkDrawGlow = this.checkDrawGlow.bind(this);
     }
 
     getCurrentGameState() {
@@ -208,9 +211,8 @@ class App extends Component {
         return currentGameState;
     }
 
-    doPrev() {
+    doUndo() {
         if(this.state.history.length <= 1) {
-            console.log("No Prev moves ");
             return;
         }
 
@@ -253,9 +255,21 @@ class App extends Component {
         }
     }
     
+    checkDrawGlow() {
+        if(!this.checkLeftValidMoves()) {
+            this.setState((state) => {
+                return {
+                    isLeftMoves: "no-moves"
+                }
+            })
+        }
+    }
+
     checkEndGame() {
         let res = "";
-
+        
+        this.updateStatsAfterMove(false);
+        this.checkDrawGlow();
         if(this.state.player1Deck.length === 0) {
             res = "Win!"
         }
@@ -267,7 +281,7 @@ class App extends Component {
             this.setState(() => {
                 return {
                     isGameEnded: !this.state.isGameEnded,
-                    isGameStarted: !this.state.isGameStarted,
+                    isTimerStarted: false,
                     popupMessage: res
                 }
             })
@@ -275,6 +289,7 @@ class App extends Component {
         this.setState(() => {
             return {
                 isCheckEndGame: false,
+                
             }
         })
     }
@@ -293,14 +308,17 @@ class App extends Component {
     togglePopup() {
         this.setState(() => {
             return {
-                isGameEnded: !this.state.isGameEnded
+                isGameEnded: !this.state.isGameEnded,
+                isTimerStarted: true 
             }
           });
     }
+
     handleGame(info) {
         this.dealRandomBricksToPlayer();
         this.setState({
-            isGameStarted: info.isGameStarted
+            isGameStarted: info.isGameStarted,
+            isTimerStarted: info.isGameStarted
         });
 
         this.saveCurrentStateForHistory();
@@ -319,10 +337,10 @@ class App extends Component {
                                         status: "neutral"}}})
     }
 
+    
     handleDrop(e, con) {
         let id = e.dataTransfer.getData("id");
         let brick = id.split(",").map(Number);
-        console.log(brick);
         this.addBrickToBoard(brick);
     }
 
@@ -352,7 +370,7 @@ class App extends Component {
                 player1Deck: returnedValue.player1Deck,
                 isCheckEndGame: true});
 
-            this.updateStatsAfterMove(false);
+            //this.updateStatsAfterMove(false);
             this.nextTurn();
         }
     }
@@ -409,26 +427,6 @@ class App extends Component {
                             return true;
                         }
                     }
-
-                    /*
-                    if(currBrick.brick[0] == brick[0]) {
-                        if(!((myBoard[row - 1]) && (myBoard[row - 1][column].occupied)) && currBrick.direction === "vertical") {
-                            return true;
-                        }
-                        else if(!((myBoard[0][column + 1]) && (myBoard[row][column + 1].occupied)) && currBrick.direction === "horizontal") {
-                            return true;
-                        }
-                    }
-
-                    if(currBrick.brick[1] == brick[1]) {
-                        if(!((myBoard[row + 1]) && (myBoard[row + 1][column].occupied)) && currBrick.direction === "vertical") {
-                            return true;
-                        }
-                        else if(!((myBoard[0][column - 1]) && (myBoard[row][column - 1].occupied)) && currBrick.direction === "horizontal") {
-                            return true;
-                        }
-                    }
-                    */
                 }   
             }
         }
@@ -493,12 +491,7 @@ class App extends Component {
                                     myBoard.unshift(newLine);
                                 }
                                 if(brick[0] === brick[1]) {
-                                    //if(currBrick.direction === "vertical") {
                                         brickToInsert.direction = "horizontal";
-                                    //}   
-                                    //else {
-                                      //  brickToInsert.direction = "vertical";
-                                    //} 
                                 }
                                 else {
                                     brickToInsert.direction = currBrick.direction;
@@ -520,12 +513,7 @@ class App extends Component {
                                     } 
                                 }
                                 if(brick[0] === brick[1]) {
-                                   // if(currBrick.direction === "vertical") {
-                                     //   brickToInsert.direction = "horizontal";
-                                    //}   
-                                    //else {
                                         brickToInsert.direction = "vertical";
-                                    //} 
                                 }
                                 else {
                                     brickToInsert.direction = currBrick.direction;
@@ -535,7 +523,7 @@ class App extends Component {
                                 myBoard[brickToInsert.position.row][brickToInsert.position.column] = brickToInsert;
                                 player1Deck = player1Deck.filter((item) => item !== brick);
                                 found = true;
-                                }
+                            }
                             
                             if(currBrick.brick[0] === currBrick.brick[1] && !found) {
                                 if(!((myBoard[row - 1]) && (myBoard[row - 1][column].occupied)) && currBrick.direction === "horizontal") {
@@ -554,69 +542,6 @@ class App extends Component {
                                         }
                                         myBoard.unshift(newLine);
                                     }
-                                    //if(brick[0] === brick[1]) {
-                                        //if(currBrick.direction === "vertical") {
-                                            brickToInsert.direction = "vertical";
-                                        //}   
-                                        //else {
-                                          //  brickToInsert.direction = "vertical";
-                                        //} 
-                                    //}
-                                    //else {
-                                        //brickToInsert.direction = currBrick.direction;
-                                    //}
-    
-                                    brickToInsert.position.column = currBrick.position.column;
-                                    brickToInsert.position.row = currBrick.position.row - 1;
-                                    myBoard[brickToInsert.position.row][brickToInsert.position.column] = brickToInsert;
-                                    player1Deck = player1Deck.filter((item) => item !== brick);
-    
-                                    found = true;
-                                }
-
-                                else if(!((myBoard[0][column + 1]) && (myBoard[row][column + 1].occupied)) && currBrick.direction === "vertical") {
-                                    if(!myBoard[0][column + 1]) {
-                                        for(let i = 0 ; i < myBoard.length ; i++) {
-                                            myBoard[i].push({occupied: false});
-                                        } 
-                                    }
-                                    //if(brick[0] === brick[1]) {
-                                       // if(currBrick.direction === "vertical") {
-                                         //   brickToInsert.direction = "horizontal";
-                                        //}   
-                                        //else {
-                                            brickToInsert.direction = "horizontal";
-                                        //} 
-                                    //}
-                                    //else {
-                                        //brickToInsert.direction = currBrick.direction;
-                                    //}
-                                    brickToInsert.position.column = currBrick.position.column + 1;
-                                    brickToInsert.position.row = currBrick.position.row;
-                                    myBoard[brickToInsert.position.row][brickToInsert.position.column] = brickToInsert;
-                                    player1Deck = player1Deck.filter((item) => item !== brick);
-                                    found = true;
-                                    }
-                                }
-                            /*
-                            if(currBrick.brick[0] === currBrick.brick[1] && !found) {
-                                if(!((myBoard[row - 1]) && (myBoard[row - 1][column].occupied)) && currBrick.direction === "horizontal" ) {
-                                    if(!myBoard[row - 1]) {
-                                        for(let i = 0 ; i < myBoard.length ; i++) {
-                                            for(let j = 0 ; j < myBoard[i].length ; j++) {
-                                                if(myBoard[i][j].occupied) {
-                                                    myBoard[i][j].position.row++; //changing
-                                                }
-                                            } 
-                                        } 
-    
-                                        let newLine = [];
-                                        for(let i = 0 ; i < myBoard[0].length ; i++) {
-                                            newLine.push({occupied: false})
-                                        }
-                                        myBoard.unshift(newLine);
-                                    }
-                                    
                                     brickToInsert.direction = "vertical";
                                     brickToInsert.position.column = currBrick.position.column;
                                     brickToInsert.position.row = currBrick.position.row - 1;
@@ -625,6 +550,7 @@ class App extends Component {
     
                                     found = true;
                                 }
+                                ///////////////////
                                 else if(!((myBoard[row + 1]) && (myBoard[row + 1][column].occupied)) && currBrick.direction === "horizontal") {
                                     brickToInsert.brick = [brick[1], brick[0]];
                                     if(!myBoard[row + 1]) {
@@ -635,21 +561,22 @@ class App extends Component {
                                         myBoard.push(newLine);
                                     }
                                     
-                                    brickToInsert.direction = "horizontal";
-                                    brickToInsert.position.column = currBrick.position.column;
+                                    brickToInsert.direction = "vertical";
                                     brickToInsert.position.row = currBrick.position.row + 1;
+                                    brickToInsert.position.column = currBrick.position.column;
                                     myBoard[brickToInsert.position.row][brickToInsert.position.column] = brickToInsert;
                                     player1Deck = player1Deck.filter((item) => item !== brick);
                                     
                                     found = true;
                                 }
+
+
                                 else if(!((myBoard[0][column + 1]) && (myBoard[row][column + 1].occupied)) && currBrick.direction === "vertical") {
                                     if(!myBoard[0][column + 1]) {
                                         for(let i = 0 ; i < myBoard.length ; i++) {
                                             myBoard[i].push({occupied: false});
                                         } 
                                     }
-                                    
                                     brickToInsert.direction = "horizontal";
                                     brickToInsert.position.column = currBrick.position.column + 1;
                                     brickToInsert.position.row = currBrick.position.row;
@@ -657,9 +584,10 @@ class App extends Component {
                                     player1Deck = player1Deck.filter((item) => item !== brick);
                                     found = true;
                                 }
+                                ////////////////////////////////
                                 else if(!((myBoard[0][column - 1]) && (myBoard[row][column - 1].occupied)) && currBrick.direction === "vertical") {
+                                    brickToInsert.brick = [brick[1], brick[0]];
                                     if(!myBoard[0][column - 1]) {
-                                        brickToInsert.brick = [brick[1], brick[0]];
                                         for(let i = 0 ; i < myBoard.length ; i++) {
                                             myBoard[i].unshift({occupied: false});
                                             for(let j = 0 ; j < myBoard[i].length ; j++) {
@@ -669,7 +597,6 @@ class App extends Component {
                                             } 
                                         } 
                                     }
-                                    
                                     brickToInsert.direction = "horizontal";
                                     brickToInsert.position.row = currBrick.position.row;
                                     brickToInsert.position.column = currBrick.position.column - 1;
@@ -678,7 +605,8 @@ class App extends Component {
                                     
                                     found = true;
                                 }
-                            }*/
+
+                            }
                         }    
                             //Second Condition//
                         if(currBrick.brick[1] === brick[0] && !found) {
@@ -691,12 +619,7 @@ class App extends Component {
                                     myBoard.push(newLine);
                                 }
                                 if(brick[0] === brick[1]) {
-                                    //if(currBrick.direction === "vertical") {
                                         brickToInsert.direction = "horizontal";
-                                    //}   
-                                    //else {
-                                      //  brickToInsert.direction = "vertical";
-                                    //} 
                                 }
                                 else {
                                     brickToInsert.direction = currBrick.direction;
@@ -723,12 +646,7 @@ class App extends Component {
                                     } 
                                 }
                                 if(brick[0] === brick[1]) {
-                                    //if(currBrick.direction === "vertical") {
-                                      //  brickToInsert.direction = "horizontal";
-                                    //}   
-                                    //else {
                                         brickToInsert.direction = "vertical";
-                                    //} 
                                 }
                                 else {
                                     brickToInsert.direction = currBrick.direction;
@@ -750,23 +668,38 @@ class App extends Component {
                                         } 
                                         myBoard.push(newLine);
                                     }
-                                    //if(brick[0] === brick[1]) {
-                                        //if(currBrick.direction === "vertical") {
-                                            brickToInsert.direction = "vertical";
-                                        //}   
-                                        //else {
-                                          //  brickToInsert.direction = "vertical";
-                                        //} 
-                                    //}
-                                    //else {
-                                        //brickToInsert.direction = currBrick.direction;
-                                    //}
-    
+                                    brickToInsert.direction = "vertical";
                                     brickToInsert.position.row = currBrick.position.row + 1;
                                     brickToInsert.position.column = currBrick.position.column;
                                     myBoard[brickToInsert.position.row][brickToInsert.position.column] = brickToInsert;
                                     player1Deck = player1Deck.filter((item) => item !== brick);
                                     
+                                    found = true;
+                                }
+                                //////////////////////////////////////////////////////
+                                else if(!((myBoard[row - 1]) && (myBoard[row - 1][column].occupied)) && currBrick.direction === "horizontal") {
+                                    brickToInsert.brick = [brick[1], brick[0]];
+                                    if(!myBoard[row - 1]) {
+                                        for(let i = 0 ; i < myBoard.length ; i++) {
+                                            for(let j = 0 ; j < myBoard[i].length ; j++) {
+                                                if(myBoard[i][j].occupied) {
+                                                    myBoard[i][j].position.row++; //changing
+                                                }
+                                            } 
+                                        } 
+    
+                                        let newLine = [];
+                                        for(let i = 0 ; i < myBoard[0].length ; i++) {
+                                            newLine.push({occupied: false})
+                                        }
+                                        myBoard.unshift(newLine);
+                                    }
+                                    brickToInsert.direction = "vertical";
+                                    brickToInsert.position.column = currBrick.position.column;
+                                    brickToInsert.position.row = currBrick.position.row - 1;
+                                    myBoard[brickToInsert.position.row][brickToInsert.position.column] = brickToInsert;
+                                    player1Deck = player1Deck.filter((item) => item !== brick);
+    
                                     found = true;
                                 }
                                 
@@ -781,23 +714,27 @@ class App extends Component {
                                             } 
                                         } 
                                     }
-                                    //if(brick[0] === brick[1]) {
-                                        //if(currBrick.direction === "vertical") {
-                                          //  brickToInsert.direction = "horizontal";
-                                        //}   
-                                        //else {
-                                            brickToInsert.direction = "horizontal";
-                                        //} 
-                                    //}
-                                    //else {
-                                        //brickToInsert.direction = currBrick.direction;
-                                    //}
-                                    
+                                    brickToInsert.direction = "horizontal";
                                     brickToInsert.position.row = currBrick.position.row;
                                     brickToInsert.position.column = currBrick.position.column - 1;
                                     myBoard[brickToInsert.position.row][brickToInsert.position.column] = brickToInsert;
                                     player1Deck = player1Deck.filter((item) => item !== brick);
                                     
+                                    found = true;
+                                }
+                                ////////////////////////////////
+                                else if(!((myBoard[0][column + 1]) && (myBoard[row][column + 1].occupied)) && currBrick.direction === "vertical") {
+                                    brickToInsert.brick = [brick[1], brick[0]];
+                                    if(!myBoard[0][column + 1]) {
+                                        for(let i = 0 ; i < myBoard.length ; i++) {
+                                            myBoard[i].push({occupied: false});
+                                        } 
+                                    }
+                                    brickToInsert.direction = "horizontal";
+                                    brickToInsert.position.column = currBrick.position.column + 1;
+                                    brickToInsert.position.row = currBrick.position.row;
+                                    myBoard[brickToInsert.position.row][brickToInsert.position.column] = brickToInsert;
+                                    player1Deck = player1Deck.filter((item) => item !== brick);
                                     found = true;
                                 }
                             }
@@ -823,12 +760,7 @@ class App extends Component {
                                     myBoard.unshift(newLine);
                                 }
                                 if(brick[0] === brick[1]) {
-                                    //if(currBrick.direction === "vertical") {
-                                        brickToInsert.direction = "horizontal";
-                                    //}   
-                                    //else {
-                                      //  brickToInsert.direction = "vertical";
-                                    //} 
+                                    brickToInsert.direction = "horizontal";
                                 }
                                 else {
                                     brickToInsert.direction = currBrick.direction;
@@ -851,12 +783,7 @@ class App extends Component {
                                     } 
                                 }
                                 if(brick[0] === brick[1]) {
-                                    //if(currBrick.direction === "vertical") {
-                                      //  brickToInsert.direction = "horizontal";
-                                    //}   
-                                    //else {
-                                        brickToInsert.direction = "vertical";
-                                    //} 
+                                    brickToInsert.direction = "vertical"; 
                                 }
                                 else {
                                     brickToInsert.direction = currBrick.direction;
@@ -869,70 +796,6 @@ class App extends Component {
 
                                 found = true;
                             }
-/*
-                            if(currBrick.brick[0] === currBrick.brick[1] && !found) {
-                                if(!((myBoard[row - 1]) && (myBoard[row - 1][column].occupied)) && currBrick.direction === "horizontal") {
-                                    brickToInsert.brick = [brick[1], brick[0]];
-                                    if(!myBoard[row - 1]) {
-                                        for(let i = 0 ; i < myBoard.length ; i++) {
-                                            for(let j = 0 ; j < myBoard[i].length ; j++) {
-                                                if(myBoard[i][j].occupied) {
-                                                    myBoard[i][j].position.row++; //changing
-                                                }
-                                            } 
-                                        } 
-    
-                                        let newLine = [];
-                                        for(let i = 0 ; i < myBoard[0].length ; i++) {
-                                            newLine.push({occupied: false})
-                                        }
-                                        myBoard.unshift(newLine);
-                                    }
-                                    //if(brick[0] === brick[1]) {
-                                        //if(currBrick.direction === "vertical") {
-                                            brickToInsert.direction = "vertical";
-                                        //}   
-                                        //else {
-                                          //  brickToInsert.direction = "vertical";
-                                        //} 
-                                    //}
-                                    //else {
-                                        //brickToInsert.direction = currBrick.direction;
-                                    //}
-    
-                                    brickToInsert.position.column = currBrick.position.column;
-                                    brickToInsert.position.row = currBrick.position.row - 1;
-                                    myBoard[brickToInsert.position.row][brickToInsert.position.column] = brickToInsert;
-                                    player1Deck = player1Deck.filter((item) => item !== brick);
-    
-                                    found = true;
-                                }
-
-                                else if(!((myBoard[0][column + 1]) && (myBoard[row][column + 1].occupied)) && currBrick.direction === "vertical") {
-                                    brickToInsert.brick = [brick[1], brick[0]];
-                                    if(!myBoard[0][column + 1]) {
-                                        for(let i = 0 ; i < myBoard.length ; i++) {
-                                            myBoard[i].push({occupied: false});
-                                        } 
-                                    }
-                                    //if(brick[0] === brick[1]) {
-                                       // if(currBrick.direction === "vertical") {
-                                         //   brickToInsert.direction = "horizontal";
-                                        //}   
-                                        //else {
-                                            brickToInsert.direction = "horizontal";
-                                        //} 
-                                    //}
-                                    //else {
-                                        //brickToInsert.direction = currBrick.direction;
-                                    //}
-                                    brickToInsert.position.column = currBrick.position.column + 1;
-                                    brickToInsert.position.row = currBrick.position.row;
-                                    myBoard[brickToInsert.position.row][brickToInsert.position.column] = brickToInsert;
-                                    player1Deck = player1Deck.filter((item) => item !== brick);
-                                    found = true;
-                                }
-                            }*/
                         }
                         
                         //Fourth Condition//
@@ -947,12 +810,7 @@ class App extends Component {
                                     myBoard.push(newLine);
                                 }
                                 if(brick[0] === brick[1]) {
-                                    //if(currBrick.direction === "vertical") {
-                                        brickToInsert.direction = "horizontal";
-                                    //}   
-                                    //else {
-                                      //  brickToInsert.direction = "vertical";
-                                    //} 
+                                    brickToInsert.direction = "horizontal";
                                 }
                                 else {
                                     brickToInsert.direction = currBrick.direction;
@@ -980,12 +838,7 @@ class App extends Component {
                                     } 
                                 }
                                 if(brick[0] === brick[1]) {
-                                    //if(currBrick.direction === "vertical") {
-                                      //  brickToInsert.direction = "horizontal";
-                                    //}   
-                                    //else {
-                                        brickToInsert.direction = "vertical";
-                                    //} 
+                                    brickToInsert.direction = "vertical";
                                 }
                                 else {
                                     brickToInsert.direction = currBrick.direction;
@@ -998,69 +851,6 @@ class App extends Component {
                                 
                                 found = true;
                             }
-/*
-                            if(currBrick.brick[0] === currBrick.brick[1] && !found) {
-                                if(!((myBoard[row + 1]) && (myBoard[row + 1][column].occupied)) && currBrick.direction === "horizontal") {
-                                    brickToInsert.brick = [brick[1], brick[0]];
-                                    if(!myBoard[row + 1]) {
-                                        let newLine = [];
-                                        for(let i = 0 ; i < myBoard[0].length ; i++) {
-                                            newLine.push({occupied: false})
-                                        } 
-                                        myBoard.push(newLine);
-                                    }
-                                    //if(brick[0] === brick[1]) {
-                                        //if(currBrick.direction === "vertical") {
-                                            brickToInsert.direction = "vertical";
-                                        //}   
-                                        //else {
-                                          //  brickToInsert.direction = "vertical";
-                                        //} 
-                                    //}
-                                    //else {
-                                        //brickToInsert.direction = currBrick.direction;
-                                    //}
-    
-                                    brickToInsert.position.row = currBrick.position.row + 1;
-                                    brickToInsert.position.column = currBrick.position.column;
-                                    myBoard[brickToInsert.position.row][brickToInsert.position.column] = brickToInsert;
-                                    player1Deck = player1Deck.filter((item) => item !== brick);
-                                    
-                                    found = true;
-                                }
-                                
-                                else if(!((myBoard[0][column - 1]) && (myBoard[row][column - 1].occupied)) && currBrick.direction === "vertical") {
-                                    brickToInsert.brick = [brick[1], brick[0]];
-                                    if(!myBoard[0][column - 1]) {
-                                        for(let i = 0 ; i < myBoard.length ; i++) {
-                                            myBoard[i].unshift({occupied: false});
-                                            for(let j = 0 ; j < myBoard[i].length ; j++) {
-                                                if(myBoard[i][j].occupied) {
-                                                    myBoard[i][j].position.column++; //changing
-                                                }
-                                            } 
-                                        } 
-                                    }
-                                    //if(brick[0] === brick[1]) {
-                                        //if(currBrick.direction === "vertical") {
-                                          //  brickToInsert.direction = "horizontal";
-                                        //}   
-                                        //else {
-                                            brickToInsert.direction = "horizontal";
-                                        //} 
-                                    //}
-                                    //else {
-                                        //brickToInsert.direction = currBrick.direction;
-                                    //}
-                                    
-                                    brickToInsert.position.row = currBrick.position.row;
-                                    brickToInsert.position.column = currBrick.position.column - 1;
-                                    myBoard[brickToInsert.position.row][brickToInsert.position.column] = brickToInsert;
-                                    player1Deck = player1Deck.filter((item) => item !== brick);
-                                    
-                                    found = true;
-                                }
-                            }*/
                         } 
                     }
                 }
@@ -1074,18 +864,19 @@ class App extends Component {
 
     isLegalDraw() {
         //return true;
+        
         let canDrawTile = true;
         for (const tile of this.state.player1Deck) {
            if(this.isLegalMove(tile)) {
             canDrawTile = false;
             break;
-           }
         }
+    }
         return canDrawTile;
     }
 
     saveCurrentStateForHistory() {
-        let myHistory = this.deepClone(this.state.history); 
+        let myHistory = this.state.history; 
         let savedHistory =this.getCurrentGameState();
 
         myHistory.push(savedHistory);
@@ -1096,23 +887,37 @@ class App extends Component {
         })
     }
 
+    saveCurrentStateForNext() {
+        let myNext = this.state.next; 
+        let savedNext = this.getCurrentGameState();
+
+        //if(this.state.next.length !== 0) {
+            myNext.push(savedNext);
+            this.setState(() => {
+                return {
+                    next: myNext,
+                }
+            })
+       // }
+    }
+
     updateStatsAfterMove(moveWasDraw) { // make sure to save History before calling this function 
         let stats = this.state.player1Stats;
-        let playerHand =this.deepClone(this.state.player1Deck);
+        let playerHand = this.deepClone(this.state.myBoard);
         stats.Update(playerHand, moveWasDraw);
         this.setState(() => {
             return {
                 player1Stats: stats,
             }
         })
-
     }
     
     handleDrawClick() {
         if(this.state.myPile.length === 0) {
             this.setState(() => {
                 return {
-                    isPileEmpty: true
+                    isPileEmpty: true,
+                    isCheckEndGame: true
                 }
             })
             return;
@@ -1145,18 +950,68 @@ class App extends Component {
             }
         })
 
+        if(this.checkLeftValidMoves()) {
+            this.setState({isLeftMoves: "yes-moves"})
+        };
+
         this.updateStatsAfterMove(true);
         this.nextTurn();
     }
 
-    handelUndoClick() {
+    handleUndoClick() {
+        this.doUndo();
+    }
+
+    handleNextClick() {
+        this.doNext();
+    }
+
+    handlePrevClick() {
         this.doPrev();
+    }
+
+    doNext() {
+        if(this.state.next.length < 1) {
+            return;
+        }
+
+        this.saveCurrentStateForHistory();
+        let next =  this.state.next.pop();
+        this.setState({
+            numOfPlayers: next.numOfPlayers, 
+            isGameStarted: next.isGameStarted,
+            player1Deck: next.player1Deck,
+            boardBricks: next.boardBricks,  
+            playerDeck: next.playerDeck,
+            myBoard: next.myBoard,
+            myPile: next.myPile,
+            player1Stats: next.player1Stats,
+        });
+    }
+
+    doPrev() {
+        if(this.state.history.length <= 1) {
+            return;
+        }
+
+        this.saveCurrentStateForNext();
+        this.doUndo();
+    }
+
+    handleTimer(info) {
+        this.setState(() => {
+            return {
+                isTimerStarted: info.isTimerStared
+            };
+        });
     }
 
     render() {
         const myPopup = <Popup text={this.state.popupMessage} 
                         togglePopup={this.togglePopup}
-                        stats={this.state.player1Stats} />
+                        stats={this.state.player1Stats}
+                        handleNextClick={this.handleNextClick}
+                        handlePrevClick={this.handlePrevClick} />
 
         const myDeck = <Deck 
                         handleClickedBrick={this.handleClickedBrick} 
@@ -1167,38 +1022,37 @@ class App extends Component {
                         />
 
         const myBoard = <Board 
-                        //isGameStarted={this.state.isGameStarted}
+                        isTimerStarted={this.state.isTimerStarted}
                         myBoard={this.state.myBoard}
-                        handleDrop={this.handleDrop}
+                        status2={this.state.isGameEnded}
+                        //handleDrop={this.handleDrop}
                         />
         
-                        console.log(this.state.player1Stats.numOfTurns);
         return (
-
             <div className="domino-game">
-                <div className="header">
-                </div>
                 <div className="body">
-                    <div className="board-container" onDrop={this.handleDrop} onDragOver={this.handleDragOver}>
+                    <div className="board-container" 
+                            onDrop={this.handleDrop} 
+                            onDragOver={this.handleDragOver}>
                         {this.state.isGameStarted ? myBoard : null }
                     </div>
                     <div className="right-nav">
-                        <GameTimer isGameStarted={this.state.isGameStarted}/>
+                        <GameTimer isTimerStarted={this.state.isTimerStarted} />
                         <Control func={this.handleGame}/>
                         <div className="draw">
                             {this.state.isPileEmpty ? <p>No more bricks!</p> : null}
-                            <button className="my-button" onClick={this.handleDrawClick}>Draw</button>
+                            <button className="my-button" 
+                                onClick={this.handleDrawClick}
+                                status={this.state.isLeftMoves}>Draw</button>
                         </div>
                         <div>
-                            <button className="my-button" onClick = {this.handelUndoClick}>Undo</button>
+                            <button className="my-button" onClick = {this.handleUndoClick}>Undo</button>
                         </div>
                         {this.state.isGameStarted ? myDeck : null}
                     </div>
                 </div>
                 {this.state.isCheckEndGame ? this.checkEndGame() : null}
                 {this.state.isGameEnded ? myPopup : null}
-                <div className="footer">
-                </div>
             </div>
         );
     }

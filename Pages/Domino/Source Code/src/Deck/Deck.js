@@ -15,6 +15,7 @@ class Deck extends Component {
         this.handleMouseOver = this.handleMouseOver.bind(this);
         this.handleMouseOut = this.handleMouseOut.bind(this);
         this.selectedBrick = this.selectedBrick.bind(this);
+        this.handleDrop = this.handleDrop.bind(this);
     }
 
     static getDerivedStateFromProps(nextProps, prevState) {
@@ -29,7 +30,6 @@ class Deck extends Component {
     }
 
     handleClickedBrick(brick) {
-        console.log(this.props.handleClickedBrick);
         this.props.handleClickedBrick(brick);
     }
 
@@ -48,19 +48,23 @@ class Deck extends Component {
         else {
             return "neutral";
         }
-
     }
+
+    handleDrop(e, con) {
+        this.props.handleDrop(e, con);
+    }
+
     render() {
-        console.log(this.state.myDeck);
         const pickedUpBricks = this.props.myDeck.map(brick => <DominoBrick 
             handleClickedBrick={this.handleClickedBrick}
             handleMouseOver={this.handleMouseOver}
             handleMouseOut={this.handleMouseOut}
+            handleDrop={this.handleDrop}
             numbers={brick}
+            isDeckBrick={true}
             status={this.selectedBrick(brick)}
             key={`brick${brick[0]}${brick[1]}`} 
             />)
-            console.log(pickedUpBricks);
         
         return (
             <div className="deck">

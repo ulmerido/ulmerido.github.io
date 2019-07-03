@@ -1,6 +1,5 @@
 import React, {Component} from "React";
 import "./GameTimer.css";
-import { throws } from "assert";
 
 class GameTimer extends Component {
     constructor(props) {
@@ -16,6 +15,7 @@ class GameTimer extends Component {
         this.stopTimer = this.stopTimer.bind(this);
     }
 
+    /*
     static getDerivedStateFromProps(props, state) {
         if(props.isGameStarted !== state.isTimerStarted) {
             return {
@@ -25,7 +25,16 @@ class GameTimer extends Component {
         }
         return null;
     }
-
+*/
+    static getDerivedStateFromProps(props, state) {
+        if(props.isTimerStarted !== state.isTimerStarted) {
+            return {
+                isTimerStarted: props.isTimerStarted
+            };
+            
+        }
+        return null;
+    }
     startTimer() {
         let totalSeconds = 0;
         let tick = function() {
