@@ -1,0 +1,1338 @@
+
+@media only screen and (min-width:1400px) and (min-height:1200px) {
+
+    body {
+        color: #111;
+        font-family: 'Helvetica Neue', sans-serif;
+        letter-spacing: -1px;
+        background-color: #eeeeee;
+        zoom: 0.67;
+        /*background-image: url("./StyleImgs/bg3.png");*/
+    }
+
+    .logo {
+        position: sticky;
+        position: -webkit-sticky;
+        width: 60px;
+        height: 70px;
+        left: 1270px;
+    }
+
+    .lobby-container {
+        /* div between logged in user and after submit */
+        display: flex;
+    }
+
+    .games-area-title {
+        text-align: left;
+        font-size: 24px;
+        font-weight: bold;
+        margin-right: 10%;
+    }
+
+    .gameFrame {
+        float: right;
+        font-size: 16px;
+        flex-wrap: wrap;
+        border: 2px solid ghostwhite;
+        /*background-image: url("./StyleImgs/game.jpeg");*/
+        background-size: 60px 40px;
+        background-repeat: no-repeat;
+        background-position: right top;
+        border-radius: 25px;
+        width: auto;
+        margin-top: 1%;
+        margin-right: 1%;
+        padding: 1rem;
+        z-index: auto;
+        background-color: whitesmoke;
+    }
+
+    .games-area-wrapper {
+        margin-top: 56px;
+        width: 1500px;
+        /*top: 2000px;*/
+    }
+
+    .userList-area-wrpper {
+        /*position: absolute;*/
+        width: 0px;
+        height: 0px;
+    }
+
+    .games-area-wrapper > * {
+        flex: 1 1 80px;
+    }
+
+    .usersUL {
+        position: relative;
+        left: -65px;
+        top: 50px;
+        /**************/
+        background-size: 50px 30px;
+        background-repeat: no-repeat;
+        background-position: right top;
+        background-color: whitesmoke;
+        border: 2px solid ghostwhite;
+        border-radius: 15px;
+        width: 210px;
+        height: auto;
+        margin-top: 30px;
+        z-index: auto;
+    }
+
+    .user-info-area {
+        /* div of logged in user */
+        font-weight: bold;
+        font-size: 26px;
+        font-family: 'Helvetica Neue', sans-serif;
+        letter-spacing: 2px;
+        line-height: 1;
+        text-align: center;
+        text-shadow: rgb(0, 0, 0) 0px 1px 0px;
+        padding: 15px;
+        left: 60px;
+        background-size: 80px 100px;
+        background-repeat: no-repeat;
+        background-position: right top;
+
+    }
+
+    .create-game {
+        /*div between names to submit*/
+        position: relative;
+        font-size: 18px;
+        font-weight: bold;
+        top: 250px;
+        left: -545px;
+        background-size: 50px 40px;
+        background-repeat: no-repeat;
+        background-position: right top;
+        background-color: whitesmoke;
+        border: 2px solid ghostwhite;
+        border-radius: 15px;
+        margin: 2rem auto;
+        padding: 2rem;
+        z-index: auto;
+        animation-name: enterContainer;
+        animation-duration: 1s;
+        animation-delay: 1s;
+        animation-fill-mode: forwards;
+    }
+
+    @keyframes enterContainer {
+        0% {
+            transform: translateX(0px)
+        }
+        50% {
+            transform: translateX(500px)
+        }
+        100% {
+            transform: translateX(480px)
+        }
+    }
+
+    label {
+        display: block;
+        height: 20px;
+        text-align: right;
+        clear: both;
+        float: left;
+        margin-right: 15px;
+        padding: 3px;
+    }
+
+    .input-s {
+        width: auto;
+        float: none;
+        display: inline-block;
+    }
+
+    .input-w {
+        float: none;
+        display: inline-block;
+    }
+
+    input {
+        display: block;
+        width: 100%;
+        height: 35px;
+    }
+
+    select {
+        width: auto;
+        padding: 5px 20px;
+        border: none;
+        border-radius: 4px;
+        background-color: #f1f1f1;
+    }
+
+    textarea {
+        width: 100%;
+        height: 150px;
+        padding: 12px 20px;
+        box-sizing: border-box;
+        border: 2px solid #ccc;
+        border-radius: 4px;
+        background-color: #f8f8f8;
+        resize: none;
+    }
+
+    input[type=button], input[type=submit], input[type=reset] {
+        background-color: #4CAF50;
+        border: none;
+        color: white;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    input[type='checkbox'] {
+        width: 15px;
+        height: 15px;
+    }
+
+    .addGameText {
+        height: 25px;
+    }
+    
+    .addGameTitle {
+        margin-top: -2px;
+        font-weight: bold;
+    }
+
+    .userListTitle {
+        font-weight: bold;
+    }
+
+    .activeGamesTitle {
+        margin-top: -2px;
+    }
+
+    .gameName {
+        position: relative;
+
+    }
+
+    #pText {
+        font-size: 16px;
+    }
+
+    .util.btn {
+        font-weight: bold;
+        box-shadow: rgb(255, 255, 255) 0px 1px 0px 0px inset;
+        background: linear-gradient(rgb(237, 237, 237) 5%, rgb(223, 223, 223) 100%) rgb(237, 237, 237);
+        border-radius: 6px;
+        border: 1px solid rgb(220, 220, 220);
+        display: inline-block;
+        cursor: pointer;
+        color: rgb(119, 119, 119);
+        font-family: Arial;
+        font-size: 15px;
+        font-weight: bold;
+        padding: 6px 24px;
+        text-decoration: none;
+        width: auto;
+        text-shadow: rgb(255, 255, 255) 0px 1px 0px;
+    }
+
+    .util.btn.gameArea {
+        font-size: 12px;
+        width: auto;
+        padding: 6px 10px;
+    }
+
+    #logoutBtn {
+        bottom: 20px;
+        height: 50px;
+        width: 55px;
+        margin-left: -55px;
+        background-image: url("../../../public/logout.jpg");
+        background-size: 40px 50px;
+        background-repeat: no-repeat;
+        background-position: center top;
+        background-color: transparent;
+    }
+
+    #submitBtn {
+        font-weight: bold;
+        box-shadow: rgb(255, 255, 255) 0px 1px 0px 0px inset;
+        background: linear-gradient(rgb(237, 237, 237) 5%, rgb(223, 223, 223) 100%) rgb(237, 237, 237);
+        border-radius: 6px;
+        border: 1px solid rgb(220, 220, 220);
+        display: inline-block;
+        cursor: pointer;
+        color: rgb(119, 119, 119);
+        font-family: Arial;
+        font-size: 15px;
+        font-weight: bold;
+        text-decoration: none;
+        text-shadow: rgb(255, 255, 255) 0px 1px 0px;
+    }
+}
+
+@media only screen  and (min-width:1400px) and (max-height:1200px) {
+    body {
+        color: #111;
+        font-family: 'Helvetica Neue', sans-serif;
+        letter-spacing: -1px;
+        background-color: #eeeeee;
+        zoom: 0.67;
+    }
+
+    .logo {
+        position: sticky;
+        position: -webkit-sticky;
+        width: 60px;
+        height: 70px;
+        left: 1270px;
+    }
+
+    .lobby-container {
+        /* div between logged in user and after submit */
+        display: flex;
+    }
+
+    .games-area-title {
+        text-align: left;
+        font-size: 24px;
+        font-weight: bold;
+        margin-right: 10%;
+    }
+
+    .gameFrame {
+        float: right;
+        font-size: 16px;
+        flex-wrap: wrap;
+        border: 2px solid ghostwhite;
+        background-size: 60px 40px;
+        background-repeat: no-repeat;
+        background-position: right top;
+        border-radius: 25px;
+        width: 20%;
+        margin-top: 1%;
+        margin-right: 1%;
+        padding: 1rem;
+        z-index: auto;
+        background-color: whitesmoke;
+    }
+
+    .games-area-wrapper {
+        margin-top: 56px;
+        width: 1500px;
+    }
+
+    .userList-area-wrpper {
+        width: 0px;
+        height: 0px;
+    }
+
+    .games-area-wrapper > * {
+        flex: 1 1 80px;
+    }
+
+    .usersUL {
+        position: relative;
+        left: -65px;
+        top: 50px;
+        /**************/
+        background-size: 50px 30px;
+        background-repeat: no-repeat;
+        background-position: right top;
+        background-color: whitesmoke;
+        border: 2px solid ghostwhite;
+        border-radius: 15px;
+        width: 210px;
+        height: auto;
+        margin-top: 30px;
+        z-index: auto;
+    }
+
+    .user-info-area {
+        /* div of logged in user */
+        font-weight: bold;
+        font-size: 26px;
+        font-family: 'Helvetica Neue', sans-serif;
+        letter-spacing: 2px;
+        line-height: 1;
+        text-align: center;
+        text-shadow: rgb(0, 0, 0) 0px 1px 0px;
+        padding: 15px;
+        left: 60px;
+        background-size: 80px 100px;
+        background-repeat: no-repeat;
+        background-position: right top;
+    }
+
+    .create-game {
+        /*div between names to submit*/
+        position: relative;
+        font-size: 18px;
+        font-weight: bold;
+        top: 250px;
+        left: -545px;
+        background-size: 50px 40px;
+        background-repeat: no-repeat;
+        background-position: right top;
+        background-color: whitesmoke;
+        border: 2px solid ghostwhite;
+        border-radius: 15px;
+        margin: 2rem auto;
+        padding: 2rem;
+        z-index: auto;
+        animation-name: enterContainer;
+        animation-duration: 1s;
+        animation-delay: 1s;
+        animation-fill-mode: forwards;
+    }
+
+    @keyframes enterContainer {
+        0% {
+            transform: translateX(0px)
+        }
+        50% {
+            transform: translateX(500px)
+        }
+        100% {
+            transform: translateX(480px)
+        }
+    }
+
+    label {
+        display: block;
+        height: 20px;
+        text-align: right;
+        clear: both;
+        float: left;
+        margin-right: 15px;
+        padding: 3px;
+    }
+
+    .input-s {
+        width: auto;
+        float: none;
+        display: inline-block;
+    }
+
+    .input-w {
+        float: none;
+        display: inline-block;
+    }
+
+    input {
+        display: block;
+        width: 100%;
+        height: 35px;
+    }
+
+    select {
+        width: auto;
+        padding: 5px 20px;
+        border: none;
+        border-radius: 4px;
+        background-color: #f1f1f1;
+    }
+
+    textarea {
+        width: 100%;
+        height: 150px;
+        padding: 12px 20px;
+        box-sizing: border-box;
+        border: 2px solid #ccc;
+        border-radius: 4px;
+        background-color: #f8f8f8;
+        resize: none;
+    }
+
+    input[type=button], input[type=submit], input[type=reset] {
+        background-color: #4CAF50;
+        border: none;
+        color: white;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    input[type='checkbox'] {
+        width: 15px;
+        height: 15px;
+    }
+
+    .addGameText {
+        height: 25px;
+    }
+
+    .addGameTitle {
+        margin-top: -2px;
+        font-weight: bold;
+    }
+
+    .userListTitle {
+        font-weight: bold;
+    }
+
+    .activeGamesTitle {
+        margin-top: -2px;
+    }
+
+    .gameName {
+        position: relative;
+
+    }
+
+    #pText {
+        font-size: 16px;
+    }
+
+    .util.btn {
+        font-weight: bold;
+        box-shadow: rgb(255, 255, 255) 0px 1px 0px 0px inset;
+        background: linear-gradient(rgb(237, 237, 237) 5%, rgb(223, 223, 223) 100%) rgb(237, 237, 237);
+        border-radius: 6px;
+        border: 1px solid rgb(220, 220, 220);
+        display: inline-block;
+        cursor: pointer;
+        color: rgb(119, 119, 119);
+        font-family: Arial;
+        font-size: 15px;
+        font-weight: bold;
+        padding: 6px 24px;
+        text-decoration: none;
+        width: auto;
+        text-shadow: rgb(255, 255, 255) 0px 1px 0px;
+    }
+
+    .util.btn.gameArea {
+        font-size: 12px;
+        width: auto;
+        padding: 6px 10px;
+    }
+
+    #logoutBtn {
+        bottom: 20px;
+        height: 50px;
+        width: 55px;
+        margin-left: -55px;
+        background-image: url("../../../public/logout.jpg");
+        background-size: 40px 50px;
+        background-repeat: no-repeat;
+        background-position: center top;
+        background-color: transparent;
+    }
+
+    #submitBtn {
+        font-weight: bold;
+        box-shadow: rgb(255, 255, 255) 0px 1px 0px 0px inset;
+        background: linear-gradient(rgb(237, 237, 237) 5%, rgb(223, 223, 223) 100%) rgb(237, 237, 237);
+        border-radius: 6px;
+        border: 1px solid rgb(220, 220, 220);
+        display: inline-block;
+        cursor: pointer;
+        color: rgb(119, 119, 119);
+        font-family: Arial;
+        font-size: 15px;
+        font-weight: bold;
+        text-decoration: none;
+        text-shadow: rgb(255, 255, 255) 0px 1px 0px;
+    }
+}
+
+@media only screen  and (min-width:1200px) and (max-width:1400px) {
+    /*lobyStyle*/
+    body {
+        color: #111;
+        font-family: 'Helvetica Neue', sans-serif;
+        letter-spacing: -1px;
+        background-color: #eeeeee;
+        zoom: 0.67;
+    }
+
+    .logo {
+        position: sticky;
+        position: -webkit-sticky;
+        width: 60px;
+        height: 70px;
+        left: 1270px;
+    }
+
+    .lobby-container {
+        /* div between logged in user and after submit */
+        display: flex;
+    }
+
+    .games-area-title {
+        text-align: left;
+        font-size: 24px;
+        font-weight: bold;
+        margin-right: 10%;
+    }
+
+    .gameFrame {
+        float: right;
+        font-size: 16px;
+        flex-wrap: wrap;
+        border: 2px solid ghostwhite;
+        background-size: 60px 40px;
+        background-repeat: no-repeat;
+        background-position: right top;
+        border-radius: 25px;
+        width: auto;
+        margin-top: 1%;
+        margin-right: 1%;
+        padding: 1rem;
+        z-index: auto;
+        background-color: whitesmoke;
+    }
+
+    .games-area-wrapper {
+        margin-top: 56px;
+        width: 1500px;
+    }
+
+    .userList-area-wrpper {
+        width: 0px;
+        height: 0px;
+    }
+
+    .games-area-wrapper > * {
+        flex: 1 1 80px;
+    }
+
+    .usersUL {
+        position: relative;
+        left: -65px;
+        top: 50px;
+        /**************/
+        background-size: 50px 30px;
+        background-repeat: no-repeat;
+        background-position: right top;
+        background-color: whitesmoke;
+        border: 2px solid ghostwhite;
+        border-radius: 15px;
+        width: 210px;
+        height: auto;
+        margin-top: 30px;
+        z-index: auto;
+    }
+
+    .user-info-area {
+        /* div of logged in user */
+        font-weight: bold;
+        font-size: 26px;
+        font-family: 'Helvetica Neue', sans-serif;
+        letter-spacing: 2px;
+        line-height: 1;
+        text-align: center;
+        text-shadow: rgb(0, 0, 0) 0px 1px 0px;
+        padding: 15px;
+        left: 60px;
+        background-size: 80px 100px;
+        background-repeat: no-repeat;
+        background-position: right top;
+    }
+
+    .create-game {
+        /*div between names to submit*/
+        position: relative;
+        font-size: 18px;
+        font-weight: bold;
+        top: 250px;
+        left: -545px;
+        background-size: 50px 40px;
+        background-repeat: no-repeat;
+        background-position: right top;
+        background-color: whitesmoke;
+        border: 2px solid ghostwhite;
+        border-radius: 15px;
+        margin: 2rem auto;
+        padding: 2rem;
+        z-index: auto;
+        animation-name: enterContainer;
+        animation-duration: 1s;
+        animation-delay: 1s;
+        animation-fill-mode: forwards;
+    }
+
+    @keyframes enterContainer {
+        0% {
+            transform: translateX(0px)
+        }
+        50% {
+            transform: translateX(500px)
+        }
+        100% {
+            transform: translateX(480px)
+        }
+    }
+
+    label {
+        display: block;
+        height: 20px;
+        text-align: right;
+        clear: both;
+        float: left;
+        margin-right: 15px;
+        padding: 3px;
+    }
+
+    .input-s {
+        width: auto;
+        float: none;
+        display: inline-block;
+    }
+
+    .input-w {
+        float: none;
+        display: inline-block;
+    }
+
+    input {
+        display: block;
+        width: 100%;
+        height: 35px;
+    }
+
+    select {
+        width: auto;
+        padding: 5px 20px;
+        border: none;
+        border-radius: 4px;
+        background-color: #f1f1f1;
+    }
+
+    textarea {
+        width: 100%;
+        height: 150px;
+        padding: 12px 20px;
+        box-sizing: border-box;
+        border: 2px solid #ccc;
+        border-radius: 4px;
+        background-color: #f8f8f8;
+        resize: none;
+    }
+
+    input[type=button], input[type=submit], input[type=reset] {
+        background-color: #4CAF50;
+        border: none;
+        color: white;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    input[type='checkbox'] {
+        width: 15px;
+        height: 15px;
+    }
+
+    .addGameText {
+        height: 25px;
+    }
+
+    .addGameTitle {
+        margin-top: -2px;
+        font-weight: bold;
+    }
+
+    .userListTitle {
+        font-weight: bold;
+    }
+
+    .activeGamesTitle {
+        margin-top: -2px;
+    }
+
+    .gameName {
+        position: relative;
+
+    }
+
+    #pText {
+        font-size: 16px;
+    }
+
+    .util.btn {
+        font-weight: bold;
+        box-shadow: rgb(255, 255, 255) 0px 1px 0px 0px inset;
+        background: linear-gradient(rgb(237, 237, 237) 5%, rgb(223, 223, 223) 100%) rgb(237, 237, 237);
+        border-radius: 6px;
+        border: 1px solid rgb(220, 220, 220);
+        display: inline-block;
+        cursor: pointer;
+        color: rgb(119, 119, 119);
+        font-family: Arial;
+        font-size: 15px;
+        font-weight: bold;
+        padding: 6px 24px;
+        text-decoration: none;
+        width: auto;
+        text-shadow: rgb(255, 255, 255) 0px 1px 0px;
+    }
+
+    .util.btn.gameArea {
+        font-size: 12px;
+        width: auto;
+        padding: 6px 10px;
+    }
+
+    #logoutBtn {
+        bottom: 20px;
+        height: 50px;
+        width: 55px;
+        margin-left: -55px;
+        background-size: 40px 50px;
+        background-repeat: no-repeat;
+        background-position: center top;
+        background-color: transparent;
+        background-image: url("../../../public/logout.jpg");
+    }
+
+    #submitBtn {
+        font-weight: bold;
+        box-shadow: rgb(255, 255, 255) 0px 1px 0px 0px inset;
+        background: linear-gradient(rgb(237, 237, 237) 5%, rgb(223, 223, 223) 100%) rgb(237, 237, 237);
+        border-radius: 6px;
+        border: 1px solid rgb(220, 220, 220);
+        display: inline-block;
+        cursor: pointer;
+        color: rgb(119, 119, 119);
+        font-family: Arial;
+        font-size: 15px;
+        font-weight: bold;
+        text-decoration: none;
+        text-shadow: rgb(255, 255, 255) 0px 1px 0px;
+    }
+}
+
+@media only screen  and (min-width:800px) and (max-width:1200px)  {
+
+    /*lobyStyle*/
+    body {
+        color: #111;
+        font-family: 'Helvetica Neue', sans-serif;
+        letter-spacing: -1px;
+        background-color: #eeeeee;
+        zoom: 0.67;
+    }
+
+    .logo {
+        position: sticky;
+        position: -webkit-sticky;
+        width: 60px;
+        height: 70px;
+        left: 1270px;
+    }
+
+    .lobby-container {
+        /* div between logged in user and after submit */
+        display: flex;
+    }
+
+    .games-area-title {
+        text-align: left;
+        font-size: 24px;
+        font-weight: bold;
+        margin-right: 10%;
+    }
+
+    .gameFrame {
+        float: right;
+        font-size: 16px;
+        flex-wrap: wrap;
+        border: 2px solid ghostwhite;
+        background-size: 60px 40px;
+        background-repeat: no-repeat;
+        background-position: right top;
+        border-radius: 25px;
+        width: auto;
+        margin-top: 1%;
+        margin-right: 1%;
+        padding: 1rem;
+        z-index: auto;
+        background-color: whitesmoke;
+    }
+
+    .games-area-wrapper {
+        margin-top: 56px;
+        width: 1500px;
+    }
+
+    .userList-area-wrpper {
+        width: 0px;
+        height: 0px;
+    }
+
+    .games-area-wrapper > * {
+        flex: 1 1 80px;
+    }
+
+    .usersUL {
+        position: relative;
+        left: -65px;
+        top: 50px;
+        /**************/
+        background-size: 50px 30px;
+        background-repeat: no-repeat;
+        background-position: right top;
+        background-color: whitesmoke;
+        border: 2px solid ghostwhite;
+        border-radius: 15px;
+        width: 210px;
+        height: auto;
+        margin-top: 30px;
+        z-index: auto;
+    }
+
+    .user-info-area {
+        /* div of logged in user */
+        font-weight: bold;
+        font-size: 26px;
+        font-family: 'Helvetica Neue', sans-serif;
+        letter-spacing: 2px;
+        line-height: 1;
+        text-align: center;
+        text-shadow: rgb(0, 0, 0) 0px 1px 0px;
+        padding: 15px;
+        left: 60px;
+        background-size: 80px 100px;
+        background-repeat: no-repeat;
+        background-position: right top;
+    }
+
+    .create-game {
+        /*div between names to submit*/
+        position: relative;
+        font-size: 18px;
+        font-weight: bold;
+        top: 250px;
+        left: -545px;
+        background-size: 50px 40px;
+        background-repeat: no-repeat;
+        background-position: right top;
+        background-color: whitesmoke;
+        border: 2px solid ghostwhite;
+        border-radius: 15px;
+        margin: 2rem auto;
+        padding: 2rem;
+        z-index: auto;
+        animation-name: enterContainer;
+        animation-duration: 1s;
+        animation-delay: 1s;
+        animation-fill-mode: forwards;
+    }
+
+    @keyframes enterContainer {
+        0% {
+            transform: translateX(0px)
+        }
+        50% {
+            transform: translateX(500px)
+        }
+        100% {
+            transform: translateX(480px)
+        }
+    }
+
+    label {
+        display: block;
+        height: 20px;
+        text-align: right;
+        clear: both;
+        float: left;
+        margin-right: 15px;
+        padding: 3px;
+    }
+
+    .input-s {
+        width: auto;
+        float: none;
+        display: inline-block;
+    }
+
+    .input-w {
+        float: none;
+        display: inline-block;
+    }
+
+    input {
+        display: block;
+        width: 100%;
+        height: 35px;
+    }
+
+    select {
+        width: auto;
+        padding: 5px 20px;
+        border: none;
+        border-radius: 4px;
+        background-color: #f1f1f1;
+    }
+
+    textarea {
+        width: 100%;
+        height: 150px;
+        padding: 12px 20px;
+        box-sizing: border-box;
+        border: 2px solid #ccc;
+        border-radius: 4px;
+        background-color: #f8f8f8;
+        resize: none;
+    }
+
+    input[type=button], input[type=submit], input[type=reset] {
+        background-color: #4CAF50;
+        border: none;
+        color: white;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    input[type='checkbox'] {
+        width: 15px;
+        height: 15px;
+    }
+
+    .addGameText {
+        height: 25px;
+    }
+
+    .addGameTitle {
+        margin-top: -2px;
+        font-weight: bold;
+    }
+
+    .userListTitle {
+        font-weight: bold;
+    }
+
+    .activeGamesTitle {
+        margin-top: -2px;
+    }
+
+    .gameName {
+        position: relative;
+
+    }
+
+    #pText {
+        font-size: 16px;
+    }
+
+    .util.btn {
+        font-weight: bold;
+        box-shadow: rgb(255, 255, 255) 0px 1px 0px 0px inset;
+        background: linear-gradient(rgb(237, 237, 237) 5%, rgb(223, 223, 223) 100%) rgb(237, 237, 237);
+        border-radius: 6px;
+        border: 1px solid rgb(220, 220, 220);
+        display: inline-block;
+        cursor: pointer;
+        color: rgb(119, 119, 119);
+        font-family: Arial;
+        font-size: 15px;
+        font-weight: bold;
+        padding: 6px 24px;
+        text-decoration: none;
+        width: auto;
+        text-shadow: rgb(255, 255, 255) 0px 1px 0px;
+    }
+
+    .util.btn.gameArea {
+        font-size: 12px;
+        width: auto;
+        padding: 6px 10px;
+    }
+
+    #logoutBtn {
+        bottom: 20px;
+        height: 50px;
+        width: 55px;
+        margin-left: -55px;
+        background-image: url("../../../public/logout.jpg");
+        background-size: 40px 50px;
+        background-repeat: no-repeat;
+        background-position: center top;
+        background-color: transparent;
+    }
+
+    #submitBtn {
+        font-weight: bold;
+        box-shadow: rgb(255, 255, 255) 0px 1px 0px 0px inset;
+        background: linear-gradient(rgb(237, 237, 237) 5%, rgb(223, 223, 223) 100%) rgb(237, 237, 237);
+        border-radius: 6px;
+        border: 1px solid rgb(220, 220, 220);
+        display: inline-block;
+        cursor: pointer;
+        color: rgb(119, 119, 119);
+        font-family: Arial;
+        font-size: 15px;
+        font-weight: bold;
+        text-decoration: none;
+        text-shadow: rgb(255, 255, 255) 0px 1px 0px;
+    }
+}
+
+@media only screen  and (max-width:800px) {
+    /*lobyStyle*/
+
+    body {
+        color: #111;
+        font-family: 'Helvetica Neue', sans-serif;
+        letter-spacing: -1px;
+        background-color: #eeeeee;
+        zoom: 0.67;
+    }
+
+    .logo {
+        position: sticky;
+        position: -webkit-sticky;
+        width: 60px;
+        height: 70px;
+        left: 1270px;
+    }
+
+    .lobby-container {
+        /* div between logged in user and after submit */
+        display: flex;
+    }
+
+    .games-area-title {
+        text-align: left;
+        font-size: 24px;
+        font-weight: bold;
+        margin-right: 10%;
+    }
+
+    .gameFrame {
+        float: right;
+        font-size: 16px;
+        flex-wrap: wrap;
+        border: 2px solid ghostwhite;
+        background-size: 60px 40px;
+        background-repeat: no-repeat;
+        background-position: right top;
+        border-radius: 25px;
+        width: auto;
+        margin-top: 1%;
+        margin-right: 1%;
+        padding: 1rem;
+        z-index: auto;
+        background-color: whitesmoke;
+    }
+
+    .games-area-wrapper {
+        margin-top: 56px;
+        width: 1500px;
+    }
+
+    .userList-area-wrpper {
+        width: 0px;
+        height: 0px;
+    }
+
+    .games-area-wrapper > * {
+        flex: 1 1 80px;
+    }
+
+    .usersUL {
+        position: relative;
+        left: -65px;
+        top: 50px;
+        /**************/
+        background-size: 50px 30px;
+        background-repeat: no-repeat;
+        background-position: right top;
+        background-color: whitesmoke;
+        border: 2px solid ghostwhite;
+        border-radius: 15px;
+        width: 210px;
+        height: auto;
+        margin-top: 30px;
+        z-index: auto;
+        /* border sizing*/
+
+    }
+
+    .user-info-area {
+        /* div of logged in user */
+        font-weight: bold;
+        font-size: 26px;
+        font-family: 'Helvetica Neue', sans-serif;
+        letter-spacing: 2px;
+        line-height: 1;
+        text-align: center;
+        text-shadow: rgb(0, 0, 0) 0px 1px 0px;
+        padding: 15px;
+        left: 60px;
+        background-size: 80px 100px;
+        background-repeat: no-repeat;
+        background-position: right top;
+    }
+
+    .create-game {
+        /*div between names to submit*/
+        position: relative;
+        font-size: 18px;
+        font-weight: bold;
+        top: 250px;
+        left: -545px;
+        background-size: 50px 40px;
+        background-repeat: no-repeat;
+        background-position: right top;
+        background-color: whitesmoke;
+        border: 2px solid ghostwhite;
+        border-radius: 15px;
+        margin: 2rem auto;
+        padding: 2rem;
+        z-index: auto;
+        animation-name: enterContainer;
+        animation-duration: 1s;
+        animation-delay: 1s;
+        animation-fill-mode: forwards;
+    }
+
+    @keyframes enterContainer {
+        0% {
+            transform: translateX(0px)
+        }
+        50% {
+            transform: translateX(500px)
+        }
+        100% {
+            transform: translateX(480px)
+        }
+    }
+
+    label {
+        display: block;
+        height: 20px;
+        text-align: right;
+        clear: both;
+        float: left;
+        margin-right: 15px;
+        padding: 3px;
+    }
+
+    .input-s {
+        width: auto;
+        float: none;
+        display: inline-block;
+    }
+
+    .input-w {
+        float: none;
+        display: inline-block;
+    }
+
+    input {
+        display: block;
+        width: 100%;
+        height: 35px;
+    }
+
+    select {
+        width: auto;
+        padding: 5px 20px;
+        border: none;
+        border-radius: 4px;
+        background-color: #f1f1f1;
+    }
+
+    textarea {
+        width: 100%;
+        height: 150px;
+        padding: 12px 20px;
+        box-sizing: border-box;
+        border: 2px solid #ccc;
+        border-radius: 4px;
+        background-color: #f8f8f8;
+        resize: none;
+    }
+
+    input[type=button], input[type=submit], input[type=reset] {
+        background-color: #4CAF50;
+        border: none;
+        color: white;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    input[type='checkbox'] {
+        width: 15px;
+        height: 15px;
+    }
+
+    .addGameText {
+        height: 25px;
+    }
+
+    .addGameTitle {
+        margin-top: -2px;
+        font-weight: bold;
+    }
+
+    .userListTitle {
+        font-weight: bold;
+    }
+
+    .activeGamesTitle {
+        margin-top: -2px;
+    }
+
+    .gameName {
+        position: relative;
+
+    }
+
+    #pText {
+        font-size: 16px;
+    }
+
+    .util.btn {
+        font-weight: bold;
+        box-shadow: rgb(255, 255, 255) 0px 1px 0px 0px inset;
+        background: linear-gradient(rgb(237, 237, 237) 5%, rgb(223, 223, 223) 100%) rgb(237, 237, 237);
+        border-radius: 6px;
+        border: 1px solid rgb(220, 220, 220);
+        display: inline-block;
+        cursor: pointer;
+        color: rgb(119, 119, 119);
+        font-family: Arial;
+        font-size: 15px;
+        font-weight: bold;
+        padding: 6px 24px;
+        text-decoration: none;
+        width: auto;
+        text-shadow: rgb(255, 255, 255) 0px 1px 0px;
+    }
+
+    .util.btn.gameArea {
+        font-size: 12px;
+        width: auto;
+        padding: 6px 10px;
+    }
+
+    #logoutBtn {
+        bottom: 20px;
+        height: 50px;
+        width: 55px;
+        margin-left: -55px;
+        background-image: url("../../../public/logout.jpg");
+        background-size: 40px 50px;
+        background-repeat: no-repeat;
+        background-position: center top;
+        background-color: transparent;
+    }
+
+    #submitBtn {
+        font-weight: bold;
+        box-shadow: rgb(255, 255, 255) 0px 1px 0px 0px inset;
+        background: linear-gradient(rgb(237, 237, 237) 5%, rgb(223, 223, 223) 100%) rgb(237, 237, 237);
+        border-radius: 6px;
+        border: 1px solid rgb(220, 220, 220);
+        display: inline-block;
+        cursor: pointer;
+        color: rgb(119, 119, 119);
+        font-family: Arial;
+        font-size: 15px;
+        font-weight: bold;
+        text-decoration: none;
+        text-shadow: rgb(255, 255, 255) 0px 1px 0px;
+    }
+}

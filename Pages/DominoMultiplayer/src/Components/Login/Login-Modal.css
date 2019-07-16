@@ -1,0 +1,249 @@
+.login-page-wrapper { 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    background: #50a3a2;
+	background: -webkit-linear-gradient(top left, #50a3a2 0%, #53e3a6 100%);
+	background: -moz-linear-gradient(top left, #50a3a2 0%, #53e3a6 100%);
+	background: -o-linear-gradient(top left, #50a3a2 0%, #53e3a6 100%);
+	background: linear-gradient(to bottom right, #50a3a2 0%, #53e3a6 100%);
+    border-radius: 25px;
+    border: 3px solid black;
+}
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	font-weight: 300;
+}
+
+body {
+	color: white;
+	font-weight: 300;
+}
+
+.wrapper {
+	position: absolute;
+	top: 50%;
+	left: 0;
+	width: 100%;
+	height: 400px;
+	margin-top: -200px;
+    overflow: hidden;
+}
+
+.container {
+	max-width: 600px;
+	margin: 0 auto;
+	padding: 80px 0;
+	height: 400px;
+	text-align: center;
+}
+
+.container h1 {
+    font-size: 40px;
+	transition-duration: 1s;
+	transition-timing-function: ease-in-out;
+    font-weight: 200;
+    position: relative;
+    z-index: 2;
+}
+
+.container h3 {
+    position: relative;
+    z-index: 2;
+}
+
+form {
+	padding: 20px 0;
+	position: relative;
+	z-index: 2;
+}
+
+form button {
+    appearance: none;
+    outline: 0;
+    background-color: white;
+    border: 0;
+    padding: 10px 15px;
+    color: #53e3a6;
+    font-family: 'Atma';
+    border-radius: 3px;
+    width: 250px;
+    cursor: pointer;
+    font-size: 18px;
+    transition-duration: 0.25s;
+}
+
+form button:hover {
+    background-color: rgb(245, 247, 249);
+}
+
+form input {
+    display: block;
+    appearance: none;
+    outline: 0;
+    border: 1px solid rgb(255, 255, 255, 0.4);
+    background-color: rgb(255, 255, 255, 0.2);
+    width: 250px;
+    font-family: 'Atma';
+    border-radius: 3px;
+    padding: 10px 15px;
+    margin: 0 auto 10px auto;
+    display: block;
+    text-align: center;
+    font-size: 18px;
+    color: white;
+    transition-duration: 0.25s;
+    font-weight: 300;
+}
+
+form input:hover {
+    background-color: rgb(255, 255, 255, 0.4);
+}
+
+form input:focus {
+    background-color: white;
+    width: 300px;
+    color: #53e3a6;
+}
+
+form input:focus::-webkit-input-placeholder {
+    opacity: 0;
+}
+
+.bg-bubbles {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 1;
+}
+
+.bg-bubbles img:nth-child(1) {
+    left: 20%;
+    width: 30px;
+    height: 60px;
+    animation-delay: 2s;
+    animation-duration: 17s;
+}
+
+.bg-bubbles img:nth-child(2) {
+    left: 10%;
+    width: 40px;
+    height: 70px;
+}
+
+.bg-bubbles img:nth-child(3) {
+    left: 25%;
+    animation-delay: 4s;
+    width: 20px;
+    height: 50px;
+}
+
+.bg-bubbles img:nth-child(4) {
+    left: 40%;
+    animation-duration: 22s;
+    background-color: rgb(255, 255, 255, 0.25);
+    width: 40px;
+    height: 80px;
+}
+
+.bg-bubbles img:nth-child(5) {
+    left: 70%;
+    width: 40px;
+    height: 70px;
+}
+
+.bg-bubbles img:nth-child(6) {
+    left: 80%;
+    animation-delay: 3s;
+    background-color: rgb(255, 255, 255, 0.2);
+    width: 40px;
+    height: 90px;
+}
+
+.bg-bubbles img:nth-child(7) {
+    left: 32%;
+    animation-delay: 7s;
+    width: 30px;
+    height: 60px;
+}
+
+.bg-bubbles img:nth-child(8) {
+    left: 40%;
+    left: 55%;
+    animation-delay: 15s;
+    animation-duration: 40s;
+    width: 30px;
+    height: 60px;
+}
+
+.bg-bubbles img:nth-child(9) {
+    left: 25%;
+    animation-delay: 2s;
+    animation-duration: 40s;
+    background-color: rgb(255, 255, 255, 0.3);
+    width: 40px;
+    height: 70px;
+}
+
+.bg-bubbles img:nth-child(10) {
+    left: 90%;
+    animation-delay: 11s;
+    width: 30px;
+    height: 60px;
+}
+
+.bg-bubbles img:nth-child(11) {
+    left: 20%;
+    animation-delay: 17s;
+    width: 20px;
+    height: 40px;
+}
+
+.bg-bubbles img:nth-child(12) {
+    left: 60%;
+    animation-delay: 21s;
+    width: 40px;
+    height: 70px;
+}
+
+.bg-bubbles img{
+    position: absolute;
+    list-style: none;
+    display: block;
+    width: 30px;
+    height: 60px;
+    background-color: rgb(255, 255, 255, 0.15);
+    bottom: -160px;
+
+    -webkit-animation: square 25s infinite;
+    animation: square 25s infinite;
+
+    -webkit-transition-timing-function: linear;
+    transition-timing-function: linear;
+}
+
+@-webkit-keyframes square {
+	0% {
+		transform: translateY(0);
+	}
+	100% {
+		transform: translateY(-700px) rotate(600deg);
+	}
+}
+@keyframes square {
+	0% {
+		transform: translateY(0);
+	}
+	100% {
+		transform: translateY(-700px) rotate(600deg);
+	}
+}

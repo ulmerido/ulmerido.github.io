@@ -1,0 +1,27 @@
+
+.board-row>td {
+    text-align: center;
+}
+
+.domino-dot {
+    width: 65%;
+    height: 65%;
+    border-radius: 50px;
+    background-color: #fff;
+    position: relative;
+}
+
+.dots-table {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 8%;
+}
+
+.half-brick {
+    font-size: 15px;
+    width: 100%;
+    height: 50%;
+    margin: 0px;
+    position: relative;
+}
