@@ -1,0 +1,131 @@
+.container{
+    display: flex;
+    position: relative;
+    background: #ccc;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.video{
+    width:100%;
+    border-radius:4px;
+}
+
+.c-video{
+    width:100%;
+    max-width: 800px;
+    position: relative;
+    overflow: hidden;
+    border-radius:4px;
+}
+
+.c-video:hover .controls{
+        transform: translateY(0);
+}
+
+.controls{
+    display: flex;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    flex-wrap: wrap;
+    background-color: rgb(0, 0, 0,0.7);
+    transform: translateY(100%) translateY(-4%);
+    transition: all 0.25s;
+    overflow: auto;
+
+}
+
+.control-panel button{
+    padding:4px;
+    margin-left: 8px;
+    color: #fff;
+}
+
+.control-panel span{
+    color: #fff;
+     margin-left: 4px;
+}
+
+#play-pause{
+    background:transparent;
+    border: none;
+}
+
+#unlike{
+    content: '\f28b';
+    background:transparent;
+    border: none;
+}
+
+#like{
+    content: '\f28b';
+    background:transparent;
+    border: none;
+}
+
+#bar-time{
+    background: transparent;
+    color: #fff;
+}
+
+.control-panel button:before{
+    background: none;
+    border: 0;
+    outline: 0;
+    margin-left: 4px;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 24px;
+    font-weight: 900;    
+    font-family: 'Font Awesome 5 Free' ;
+
+}
+
+.control-panel #play-pause:before{
+    content: "\f04b" ;
+}
+
+.control-panel #like:before{
+    content: "\f164" ;
+}
+
+.control-panel #unlike:before{
+    content: "\f165" ;
+}
+
+.control-panel #play-pause.play:before{
+    font-family: 'Font Awesome 5 Free' ;
+    content: "\f144" ;
+}
+
+.control-panel #play-pause.pause:before{
+    font-family: 'Font Awesome 5 Free' ;
+    content: '\f28b'; 
+}
+
+.orange-bar{
+    height: 8px;
+    width: 100%;
+    background-color: white;
+    border-radius:4px;
+}
+
+.orange-juice{
+    height: inherit;
+    background-color: #00112B;
+    width: inherit;
+    transition: width 0.2s linear;
+    border-radius:inherit;
+}
+
+.downPanel{
+    width:100%;
+    max-width: 800px;
+    border-radius:4px;
+    background-color: aquamarine;
+}

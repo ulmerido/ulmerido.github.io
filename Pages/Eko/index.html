@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./public/styles.css" type="text/css">
+    <link rel="stylesheet" href="./src/css/fontawesome-free-5.11.2-web/css/all.css" type="text/css">
+
+
+    <title>HTML5 Custom Video Player</title>
+</head>
+
+<body>
+    <script src="https://www.gstatic.com/firebasejs/6.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-database.js"></script>
+
+    <div class="container">
+        <div class="c-video">
+            <video id="video1" class="video" source src="http://clips.vorwaerts-gmbh.de/VfE_html5.mp4"></video>
+            <div class="controls">
+                <div class="orange-bar" id="bar">
+                    <div class="orange-juice"></div>
+                </div>
+                <div class="control-panel">
+                    <button id="play-pause"></button>
+                    <button id="like"></button>
+                    <span id="label-likes"></span>
+                    <button id="unlike"></button>
+                    <span id="label-unlikes"></span>
+                    <span id="video-time"></span>
+                    <span></span>
+                    <span id="label-views-text">Views: </span>
+                    <span id="label-views"> </span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script type="module" src="./public/bundle.js"></script>
+
+</body>
+
+</html>
